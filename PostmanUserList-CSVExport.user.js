@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Add Export Postman User List to CSV Button
+// @name         Export Postman User List Button
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Add export to CSV functionality to a specific table
+// @version      1.3
+// @description  Add Export-to-CSV functionality to Postman Enterprise's Member Overview
 // @author       Your Name
 // @match        https://*.postman.co/reports/*
 // @grant        none
@@ -34,9 +34,15 @@
     return data.join("\n");
   }
 
-  function downloadCSV(csv, filename) {
+  function downloadCSV(csv) {
     var csvFile;
     var downloadLink;
+
+    // Create a date object and format the date and time
+    var now = new Date();
+    var date = now.toISOString().slice(0, 10); // Format: YYYY-MM-DD
+    var time = now.toTimeString().slice(0, 8).replace(/:/g, "-"); // Format: HH-MM-SS
+    var filename = `PostmanUsers-${date}-${time}.csv`;
 
     csvFile = new Blob([csv], { type: "text/csv" });
 
@@ -57,7 +63,7 @@
   button.style.color = "white"; // Text color
   button.style.border = "1px solid #686868"; // Button border
   button.style.borderRadius = "10px"; // Border radius
-  button.style.padding = "5px 5px"; // Padding inside the button
+  button.style.padding = "10px 10px"; // Padding inside the button
   button.style.marginRight = "10px"; // Margin to the right
   button.style.cursor = "pointer"; // Cursor on hover
 
@@ -68,6 +74,14 @@
   container.style.right = "15px"; // Margin from the right
   container.style.zIndex = "1000"; // Ensure it's on top of other elements
   container.appendChild(button);
+
+  // Add hover effect
+  button.onmouseover = function () {
+    button.style.backgroundColor = "#FFA500"; // Orange color on hover
+  };
+  button.onmouseout = function () {
+    button.style.backgroundColor = "#323232"; // Original color when not hovering
+  };
 
   button.onclick = function () {
     // Adjust selectors to match your table header and body
