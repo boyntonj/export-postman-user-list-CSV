@@ -20,4 +20,4 @@ This userscript adds functionality to export your Postman User List to a CSV fil
 
 ### Using the Userscript
 
--- Once installed, the script automatically runs on web pages that match the specified URL (in this case, pages under https://*.postman.co/reports/*). It adds a button labeled "Export User List to CSV" to the page, which when clicked, exports the data from the specified HTML table into a CSV file.
+- Once installed, the script automatically runs on web pages that match the specified URL (in this case, pages under https://*.postman.co/reports/*). It adds a button labeled "Export User List to CSV" to the page, which when clicked, exports the data from the specified HTML table into a CSV file.
